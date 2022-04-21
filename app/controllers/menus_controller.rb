@@ -17,6 +17,7 @@ class MenusController < ApplicationController
 
   # GET /menus/1/edit
   def edit
+    @menu.category_id
   end
 
   # POST /menus or /menus.json
@@ -65,6 +66,6 @@ class MenusController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def menu_params
-      params.require(:menu).permit(:name, :price, :description)
+      params.require(:menu).permit(:name, :price, :description, :category_id)
     end
 end

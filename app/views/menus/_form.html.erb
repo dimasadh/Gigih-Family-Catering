@@ -27,6 +27,10 @@
   </div>
 
   <div>
+    <%=   select(:menu, :category_id, Category.all.collect { |c| [ c.name, c.id ] }, { include_blank: "Select Category" }) %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
