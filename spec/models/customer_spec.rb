@@ -16,4 +16,11 @@ RSpec.describe Customer, type: :model do
 
     expect(customer2.errors[:email]).to include("has already been taken")
   end
+
+  it "is invalid without a name" do
+    customer = Category.create(:email => nil)
+    customer.valid?
+
+    expect(customer.errors[:email]).to include("can't be blank")
+  end 
 end
