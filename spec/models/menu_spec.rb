@@ -19,4 +19,6 @@ RSpec.describe Menu, type: :model do
 
     expect(menu.errors[:description]).to include("is too long (maximum is 150 characters)")
   end
+  subject { FactoryBot.build(:menu) }
+  it { should belong_to(:category).class_name('Category') }
 end
