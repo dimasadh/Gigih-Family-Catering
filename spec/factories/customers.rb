@@ -4,6 +4,6 @@ FactoryBot.define do
   end
 
   factory :invalid_customer, parent: :customer do
-    email { "MyString@email" }
+    email { "halo@gigih" }
   end
 end

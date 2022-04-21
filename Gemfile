@@ -66,6 +66,9 @@ group :development do
   # gem "spring"
 end
 
+# use email validator from https://github.com/micke/valid_email2
+gem "valid_email2"
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
