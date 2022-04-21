@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Menu, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "can input data" do
+    Category.create(name: "Kategori1")
+    expect(menu = FactoryBot.build(:menu)).to be_valid
+  end
 end

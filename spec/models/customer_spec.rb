@@ -18,7 +18,7 @@ RSpec.describe Customer, type: :model do
   end
 
   it "is invalid without a name" do
-    customer = Category.create(:email => nil)
+    customer = Customer.create(:email => nil)
     customer.valid?
 
     expect(customer.errors[:email]).to include("can't be blank")
