@@ -21,9 +21,13 @@ class CustomersController < ApplicationController
   end
 
   def set_current_customer
-    @customer = Customer.find(params[:customer][:id])
-    session[:current_customer] = @customer
-    redirect_to menus_path
+    if params[:customer].present?
+      @customer = Customer.find(params[:customer][:id])
+      session[:current_customer] = @customer
+      redirect_to menus_path
+    else
+      redirect_to root_path
+    end
   end
 
   def create

@@ -15,7 +15,11 @@ class OrderDetailsController < ApplicationController
 
   # GET /order_details/new
   def new
-    @order_detail = OrderDetail.new
+    if session[:current_customer].present?
+      @order_detail = OrderDetail.new
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /order_details/1/edit

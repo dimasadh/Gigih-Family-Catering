@@ -3,7 +3,11 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @orders = Order.where("customer_id = ?", session[:current_customer]["id"])
+    if session[:current_customer].present?
+      @orders = Order.where("customer_id = ?", session[:current_customer]["id"])
+    else
+      redirect_to root_path
+    end
   end
 
   def show
@@ -12,7 +16,11 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
+    if session[:current_customer].present?
+      @order = Order.new
+    else
+      redirect_to root_path
+    end
   end
 
   def edit
