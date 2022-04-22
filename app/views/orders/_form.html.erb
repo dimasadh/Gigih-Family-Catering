@@ -11,8 +11,13 @@
     </div>
   <% end %>
 
-  <%= form.hidden_field :total_price, value: 0.0 %>
-  <%= form.hidden_field :status, value: "NEW"%>
+  <label for="status">Status: </label>
+  <select name="status" id="status">
+    <option value="NEW">New</option>
+    <option value="PAID">Paid</option>
+    <option value="CANCELED">Canceled</option>
+  </select>
+  <br><br>
 
   <div>
     <%= form.submit %>

@@ -1,6 +1,10 @@
 <h1>New order</h1>
 
-<%= render "form", order: @order %>
+<form method="post" action="/orders">
+  <input type="hidden" id="total_price" name="total_price" value=0.0> 
+  <input type="hidden" id="status" name="status" value="NEW">
+  <input type="submit" value="Create Order">
+</form>
 
 <br>
 
