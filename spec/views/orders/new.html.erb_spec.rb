@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "orders/new", type: :view do
   before(:each) do
-    assign(:order, Order.new(
+    Customer.create(email: "customer@email.com")
+    assign(:order, Order.create!(
       total_price: 1.5,
-      status: "MyString"
+      status: "MyString",
+      customer_id: 1
     ))
   end
 

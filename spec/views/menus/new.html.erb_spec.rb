@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "menus/new", type: :view do
   before(:each) do
-    assign(:menu, Menu.new(
+    Category.create(name: "Category")
+    assign(:menu, Menu.create!(
       name: "MyString",
       price: 1.5,
-      description: "MyText"
+      description: "MyText",
+      category_id: 1
     ))
   end
 

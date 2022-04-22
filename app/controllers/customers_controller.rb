@@ -38,21 +38,16 @@ class CustomersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @customer.update(customer_params)
-        redirect_to customer_url(@customer), notice: "Customer was successfully updated."
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    if @customer.update(customer_params)
+      redirect_to customer_url(@customer), notice: "Customer was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @customer.destroy
-
-    respond_to do |format|
-      redirect_to customers_url, notice: "Customer was successfully destroyed."
-    end
+    redirect_to customers_url, notice: "Customer was successfully destroyed."
   end
 
   private
