@@ -20,6 +20,10 @@ class ReportsController < ApplicationController
         @orders = Order.where("total_price > ?", order_params[:price]).order(total_price: :desc)
     end
 
+    def report_by_lower_than
+        @orders = Order.where("total_price < ?", order_params[:price]).order(total_price: :asc)
+    end 
+
     def order_params
         params.permit(:email, :price, :start_date, :end_date, customer: [:id])
     end
