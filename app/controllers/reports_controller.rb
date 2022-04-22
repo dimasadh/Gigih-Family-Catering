@@ -12,7 +12,11 @@ class ReportsController < ApplicationController
         @orders = Order.where(created_at: order_params[:start_date]..order_params[:end_date])
     end
 
+    def report_by_customer
+        @orders = Order.where(customer_id: order_params[:customer][:id])
+    end
+
     def order_params
-        params.permit(:email, :price_limit, :start_date, :end_date)
+        params.permit(:email, :price_limit, :start_date, :end_date, customer: [:id])
     end
 end

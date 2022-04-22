@@ -10,6 +10,7 @@
 </form>
 
 <form action="/report_by_customer" method="post">
+  <label for="customer_id">Select Customer</label>
   <%=select(:customer, :id, Customer.all.collect { |c| [ c.email, c.id ] }, { include_blank: "Select Email" }) %>
   <input type="submit">
 </form>
