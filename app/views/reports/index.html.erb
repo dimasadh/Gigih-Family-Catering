@@ -1,0 +1,16 @@
+<h2>Order Reports</h2>
+<%= link_to "Today's Reports", todays_report_url %>
+<br>
+<form action="/report_by_date_range" method="post">
+  <label for="start_date">Start Date:</label>
+  <input type="date" id="start_date" name="start_date">
+  <label for="end_date">End Date:</label>
+  <input type="date" id="end_date" name="end_date">
+  <input type="submit">
+</form>
+
+<form action="/report_by_customer" method="post">
+  <%=select(:customer, :id, Customer.all.collect { |c| [ c.name, c.id ] }, { include_blank: "Select Email" }) %>
+  <input type="submit">
+</form>
+
