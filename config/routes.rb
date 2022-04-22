@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :menus
   resources :customers
   resources :order_details
+  resources :categories
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   post '/set_current_customer', to: 'customers#set_current_customer'
 
