@@ -1,11 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @order %>
-
+<h3>Menu ordered : </h3>
 <div id="order_details">
-  <% @order_details.each do |order_detail| %>
-    <%= render order_detail %>
-  <% end %>
+  <table>
+    <tr>
+      <th style="padding: 4px 12px;">Name</th>
+      <th style="padding: 4px 12px;">Quantity</th>
+      <th style="padding: 4px 12px;">Sum Price</th>
+      <th></th>
+    </tr>
+    <% @order_details.each do |order_detail| %>
+      <tr>
+        <td style="padding: 4px 12px;"><%=order_detail.menu.name %></td>
+        <td style="padding: 4px 12px;"><%=order_detail.quantity %></td>
+        <td style="padding: 4px 12px;"><%=order_detail.sum_price %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 
 <div>
