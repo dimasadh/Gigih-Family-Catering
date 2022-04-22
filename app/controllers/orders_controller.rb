@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @orders = Order.all
-    session[:current_customer] = 1
   end
 
   # GET /orders/1 or /orders/1.json
@@ -16,9 +15,6 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    # redirect_to controller: OrderDetailsController, action: 'new', order_id: 3
-    # session[:current_order] = 1
-    # redirect_to order_details_url
   end
 
   # GET /orders/1/edit
@@ -28,7 +24,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params.merge(customer_id: session[:current_customer]))
+    @order = Order.new(order_params.merge(customer_id: session[:current_customer]["id"]))
 
     respond_to do |format|
       if @order.save

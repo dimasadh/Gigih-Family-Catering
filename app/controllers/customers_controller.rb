@@ -1,5 +1,10 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[ show edit update destroy ]
+  before_action :set_customer, only: %i[ show edit update destroy]
+  skip_before_action :verify_authenticity_token
+
+  def home
+    @customers = Customer.all
+  end 
 
   # GET /customers or /customers.json
   def index
@@ -19,12 +24,19 @@ class CustomersController < ApplicationController
   def edit
   end
 
+  def set_current_customer
+    @customer = Customer.find(params[:customer][:id])
+    session[:current_customer] = @customer
+    redirect_to menus_path
+  end
+
   # POST /customers or /customers.json
   def create
     @customer = Customer.new(customer_params)
 
     respond_to do |format|
       if @customer.save
+        session[:current_customer] = @customer
         format.html { redirect_to customer_url(@customer), notice: "Customer was successfully created." }
         format.json { render :show, status: :created, location: @customer }
       else

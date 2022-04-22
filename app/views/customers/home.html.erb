@@ -1,0 +1,14 @@
+<h1>Gigih Family Catering</h1>
+<h3>Hello there!</h3>
+<h4>Please let us know who you are</h4>
+
+<form action="/set_current_customer" method="post">
+  <%=   select(:customer, :id,  Customer.all.collect { |c| [ c.email, c.id] }) %>
+  <div style="margin:16px 0;">
+    <input type="submit" value="This is me">
+  </div>
+</form>
+
+<p>or</p>
+
+<%= link_to "Register yourself", new_customer_path %>
