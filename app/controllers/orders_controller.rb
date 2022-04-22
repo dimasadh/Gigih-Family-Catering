@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order.destroy
+    destroy_order_details(@order.id)
 
     redirect_to orders_url, notice: "Order was successfully destroyed." 
    
@@ -51,5 +52,12 @@ class OrdersController < ApplicationController
 
     def order_params
       params.permit(:total_price, :status)
+    end
+    
+    def destroy_order_details(id)
+      order_details = OrderDetail.where("order_id = ?", id)
+      order_details.each do |order_detail|
+        order_detail.destroy
+      end
     end
 end
