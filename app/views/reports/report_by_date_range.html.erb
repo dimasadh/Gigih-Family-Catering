@@ -1,20 +1,3 @@
-<div id="orders">
-  <table style="margin-bottom: 16px;">
-    <tr>
-      <th style="padding: 4px 12px;">Customer</th>
-      <th style="padding: 4px 12px;">Total Price</th>
-      <th style="padding: 4px 12px;">Status</th>
-      <th style="padding: 4px 12px;">Date</th>
-      <th></th>
-    </tr>
-    <% @orders.each do |order| %>
-      <tr>
-        <td style="padding: 4px 12px;"><%=order.customer.email %></td>
-        <td style="padding: 4px 12px;"><%=order.total_price %></td>
-        <td style="padding: 4px 12px;"><%=order.status %></td>
-        <td style="padding: 4px 12px;"><%=order.created_at.to_date %></td>
-        <td style="padding: 4px 12px;"><%= link_to "Show this order", order %></td>
-      </tr>
-    <% end %>
-  </table>
-</div>
+<h2>Order Report by Date Range</h2>
+<h4>Starts from <%= @start_date%> to <%= @end_date %></h4>
+<%= render "report", orders: @orders %>
