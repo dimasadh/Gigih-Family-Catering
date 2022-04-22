@@ -14,6 +14,8 @@
     <%= link_to "Customers", customers_path %>
     <%= link_to "Menus", menus_path %>
     <%= link_to "Orders", orders_path %>
+    <%= link_to "Reports", reports_path %>
+    <p>Logged in as <strong><%=session[:current_customer]["email"]%></strong></p>
     <%= yield %>
   </body>
 </html>
