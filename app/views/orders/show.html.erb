@@ -2,9 +2,19 @@
 
 <%= render @order %>
 
+<div id="order_details">
+  <% @order_details.each do |order_detail| %>
+    <%= render order_detail %>
+  <% end %>
+</div>
+
 <div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
+  <%= link_to "Edit order cart", order_details_url %>
+  <br />
+  <%= link_to "Edit status order", edit_order_path(@order) %>
+  <br />
   <%= link_to "Back to orders", orders_path %>
+  <br />
 
   <%= button_to "Destroy this order", @order, method: :delete %>
 </div>

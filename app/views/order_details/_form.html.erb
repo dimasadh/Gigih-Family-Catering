@@ -1,27 +1,24 @@
-<% Menu.all.each do |menu| %>
+<table style="margin-bottom: 16px;">
+  <tr>
+    <th style="padding: 4px 12px;">Name</th>
+    <th style="padding: 4px 12px;">Price</th>
+    <th style="padding: 4px 12px;">Category</th>
+  </tr>
+  <% Menu.all.each do |menu| %>
 
-  <div id="<%= dom_id menu %>">
-    <p>
-      <strong>Name:</strong>
-      <%= menu.name %>
-    </p>
+    <div id="<%= dom_id menu %>">
+      
 
-    <p>
-      <strong>Price:</strong>
-      <%= menu.price %>
-    </p>
+      <tr>
+        <td style="padding: 4px 12px;"><%= menu.name %></td>
+        <td style="padding: 4px 12px;"><%= menu.price %></td>
+        <td style="padding: 4px 12px;"><%= menu.category.name %></td>
+      </tr>
 
-    <p>
-      <strong>Description:</strong>
-      <%= menu.description %>
-    </p>
 
-    <p>
-      <strong>Menu id:</strong>
-      <%= menu.description %>
-    </p>
-  </div>
-<% end %>
+    </div>
+  <% end %>
+</table>
 
 <%= form_with(model: order_detail) do |form| %>
   <% if order_detail.errors.any? %>
@@ -37,11 +34,11 @@
 
   <% end %>
   
-  <%=   select(:order_detail, :menu_id,  Menu.all.collect { |c| [ c.name, c.id] }, { include_blank: "Select Menu" }) %>
+  <%=   select(:order_detail, :menu_id,  Menu.all.collect { |c| [ c.name, c.id] }) %>
 
   <div>
-    <%= form.label :quantity, style: "display: block" %>
-    <%= form.number_field :quantity %>
+    <%= form.label :quantity, style: "display: block; margin-top: 16px;" %>
+    <%= form.number_field :quantity, min: 1, style: "margin-bottom: 16px;" %>
   </div>
 
   <div>

@@ -11,15 +11,8 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :total_price, style: "display: block" %>
-    <%= form.text_field :total_price %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
+  <%= form.hidden_field :total_price, value: 0.0 %>
+  <%= form.hidden_field :status, value: "NEW"%>
 
   <div>
     <%= form.submit %>

@@ -3,7 +3,10 @@ class OrderDetailsController < ApplicationController
 
   # GET /order_details or /order_details.json
   def index
-    @order_details = OrderDetail.all
+    if session[:current_order] == nil
+      redirect_to orders_url
+    end
+    @order_details = OrderDetail.where("order_id = ?", session[:current_order])
   end
 
   # GET /order_details/1 or /order_details/1.json
@@ -21,9 +24,7 @@ class OrderDetailsController < ApplicationController
 
   # POST /order_details or /order_details.json
   def create
-    @menu = Menu.find(order_detail_params[:menu_id])
-    @sum_price = @menu.price * order_detail_params[:quantity].to_f
-    @order_detail = OrderDetail.new(order_detail_params.merge(order_id:1, menu_price:@menu.price, sum_price:@sum_price))
+    @order_detail = OrderDetail.new(prepared_order_details_params)
 
     respond_to do |format|
       if @order_detail.save
@@ -69,4 +70,16 @@ class OrderDetailsController < ApplicationController
     def order_detail_params
       params.require(:order_detail).permit(:menu_id, :order_id, :quantity, :menu_price)
     end
+
+    def sum_menu_price(price)
+      price * order_detail_params[:quantity].to_f
+    end
+
+    def prepared_order_details_params
+      menu = Menu.find(order_detail_params[:menu_id])
+      sum_price = sum_menu_price(menu.price)
+      return order_detail_params.merge(order_id: session[:current_order], 
+        menu_price:menu.price, sum_price:sum_price)
+    end
+    
 end

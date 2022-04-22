@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsRuby3</title>
+    <title>Family Catering</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <%= link_to "All Customers", customers_path %>
+    <%= link_to "All Menus", menus_path %>
+    <%= link_to "All Orders", orders_path %>
     <%= yield %>
   </body>
 </html>

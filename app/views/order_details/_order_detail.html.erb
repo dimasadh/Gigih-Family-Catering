@@ -1,12 +1,7 @@
 <div id="<%= dom_id order_detail %>">
   <p>
-    <strong>Order_id:</strong>
-    <%= order_detail.order_id %>
-  </p>
-
-  <p>
-    <strong>Menu_id:</strong>
-    <%= order_detail.menu_id %>
+    <strong>Name:</strong>
+    <%= order_detail.menu.name %>
   </p>
 
   <p>
@@ -15,7 +10,7 @@
   </p>
 
   <p>
-    <strong>Sum Price:</strong>
+    <strong>Price:</strong>
     <%= order_detail.sum_price %>
   </p>
 </div>
