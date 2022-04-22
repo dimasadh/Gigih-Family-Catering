@@ -28,8 +28,12 @@ class OrderDetailsController < ApplicationController
 
     respond_to do |format|
       if @order_detail.save
-        format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully created." }
-        format.json { render :show, status: :created, location: @order_detail }
+        if update_order_total_price
+          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully created." }
+          format.json { render :show, status: :created, location: @order_detail }
+        else
+          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" }
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @order_detail.errors, status: :unprocessable_entity }
@@ -40,9 +44,13 @@ class OrderDetailsController < ApplicationController
   # PATCH/PUT /order_details/1 or /order_details/1.json
   def update
     respond_to do |format|
-      if @order_detail.update(order_detail_params)
-        format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully updated." }
-        format.json { render :show, status: :ok, location: @order_detail }
+      if @order_detail.update(prepared_order_details_params)
+        if update_order_total_price
+          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully updated." }
+          format.json { render :show, status: :ok, location: @order_detail }
+        else
+          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @order_detail.errors, status: :unprocessable_entity }
@@ -55,8 +63,12 @@ class OrderDetailsController < ApplicationController
     @order_detail.destroy
 
     respond_to do |format|
-      format.html { redirect_to order_details_url, notice: "Order detail was successfully destroyed." }
-      format.json { head :no_content }
+      if update_order_total_price
+        format.html { redirect_to order_details_url, notice: "Order detail was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" }
+      end
     end
   end
 
@@ -80,6 +92,20 @@ class OrderDetailsController < ApplicationController
       sum_price = sum_menu_price(menu.price)
       return order_detail_params.merge(order_id: session[:current_order], 
         menu_price:menu.price, sum_price:sum_price)
+    end
+
+    def update_order_total_price
+      order = Order.find(session[:current_order])
+      order_details = OrderDetail.where("order_id = ?", order.id)
+      order.total_price = 0.0
+      order_details.each do |order_detail|
+        order.total_price += order_detail.sum_price
+      end
+      if order.update({"total_price": order.total_price})
+        return true
+      else
+        return false
+      end
     end
     
 end
