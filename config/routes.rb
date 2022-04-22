@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/reports', to: 'reports#index'
   get '/todays_report', to: 'reports#todays_report'
+  post '/report_by_date_range', to: 'reports#report_by_date_range'
 
   # Defines the root path route ("/")
   root "customers#home"

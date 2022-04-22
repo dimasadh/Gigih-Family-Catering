@@ -8,6 +8,10 @@ class ReportsController < ApplicationController
         @orders = Order.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     end
 
+    def report_by_date_range
+        @orders = Order.where(created_at: order_params[:start_date]..order_params[:end_date])
+    end
+
     def order_params
         params.permit(:email, :price_limit, :start_date, :end_date)
     end
