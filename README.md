@@ -56,7 +56,7 @@ rails server -e test
 
 This entity is provided to explain how the database is designed in this project.
 
-![alt text](https://ik.imagekit.io/dimasadh/Diagram_Entitas_FP_Gigih.drawio_i6MiirEkP.png?ik-sdk-version=javascript-1.4.3&updatedAt=1650670645265)
+![alt text](https://ik.imagekit.io/dimasadh/Diagram_Entitas_FP_Gigih_yQcT-w4HT.png?ik-sdk-version=javascript-1.4.3&updatedAt=1650671944562)
 
 
 ## Issue
