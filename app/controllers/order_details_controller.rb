@@ -1,7 +1,6 @@
 class OrderDetailsController < ApplicationController
   before_action :set_order_detail, only: %i[ show edit update destroy ]
 
-  # GET /order_details or /order_details.json
   def index
     if session[:current_order] == nil
       redirect_to orders_url
@@ -9,11 +8,9 @@ class OrderDetailsController < ApplicationController
     @order_details = OrderDetail.where("order_id = ?", session[:current_order])
   end
 
-  # GET /order_details/1 or /order_details/1.json
   def show
   end
 
-  # GET /order_details/new
   def new
     if session[:current_customer].present?
       @order_detail = OrderDetail.new
@@ -22,67 +19,51 @@ class OrderDetailsController < ApplicationController
     end
   end
 
-  # GET /order_details/1/edit
   def edit
   end
 
-  # POST /order_details or /order_details.json
   def create
     @order_detail = OrderDetail.new(prepared_order_details_params)
 
-    respond_to do |format|
-      if @order_detail.save
-        if update_order_total_price
-          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully created." }
-          format.json { render :show, status: :created, location: @order_detail }
-        else
-          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" }
-        end
+    if @order_detail.save
+      if update_order_total_price
+        redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully created."
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order_detail.errors, status: :unprocessable_entity }
+        redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price"
       end
+    else
+      render :new, status: :unprocessable_entity
     end
+  
   end
 
-  # PATCH/PUT /order_details/1 or /order_details/1.json
   def update
-    respond_to do |format|
-      if @order_detail.update(prepared_order_details_params)
-        if update_order_total_price
-          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully updated." }
-          format.json { render :show, status: :ok, location: @order_detail }
-        else
-          format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" }
-        end
+    if @order_detail.update(prepared_order_details_params)
+      if update_order_total_price
+        redirect_to order_detail_url(@order_detail), notice: "Order detail was successfully updated."
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order_detail.errors, status: :unprocessable_entity }
+        redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" 
       end
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /order_details/1 or /order_details/1.json
   def destroy
     @order_detail.destroy
 
-    respond_to do |format|
-      if update_order_total_price
-        format.html { redirect_to order_details_url, notice: "Order detail was successfully destroyed." }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" }
-      end
+    if update_order_total_price
+      redirect_to order_details_url, notice: "Order detail was successfully destroyed."
+    else
+      redirect_to order_detail_url(@order_detail), notice: "Order detail could not be created. Something wrong with Order counting price" 
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_order_detail
       @order_detail = OrderDetail.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def order_detail_params
       params.require(:order_detail).permit(:menu_id, :order_id, :quantity, :menu_price)
     end
