@@ -11,9 +11,13 @@
     </div>
   <% end %>
 
-  <div class="form-group" style="margin: 10px 0;">
+  <div class="form-group">
     <label for="email">Email</label>
     <input type="text" class="form-control" name="customer[email]" id="customer_email" value="<%=customer.email%>">
   </div>
-  <button type="submit" class="btn btn-primary mb-2">Submit</button>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="customer[password]" id="customer_password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2" style="margin: 10px 0;">Submit</button>
 <% end %>
