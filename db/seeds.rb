@@ -6,9 +6,6 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Customer.create(email:'halo@email.com')
-Customer.create(email:'gigih@email.com')
-
 Category.create(name:'Nasi Goreng')
 
 Menu.create(category_id: 1, name: 'Nasi Goreng Spesial', price: 20000.0, description: 'Nasi di goreng dengan topping ayam goreng dan bakso')
