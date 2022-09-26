@@ -1,14 +1,28 @@
 <h1>Gigih Family Catering</h1>
-<h3>Hello there!</h3>
-<h4>Please let us know who you are</h4>
 
-<form action="/set_current_customer" method="post">
-  <%=   select(:customer, :id,  Customer.all.collect { |c| [ c.email, c.id] }) %>
-  <div style="margin:16px 0;">
-    <input type="submit" value="This is me">
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+
+<% if session[:current_customer] == nil %>
+  <form action="/set_current_customer" method="post">
+    <div class="form-outline mb-4">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" name="customer[email]" id="customer_email" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+    <div class="form-outline mb-4">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="customer[password]" id="customer_password" placeholder="Password">
+    </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="customers/new" class="btn btn-secondary active" role="button" aria-pressed="true">Register</a>
+    </div>
+  </form>
+<% else %>
+  <div class="form-group">
+    <label for="customer_email">Email</label>
+    <input disabled type="text" id="customer_email" name="customer_email" value="<%=session[:current_customer]%>">
   </div>
-</form>
-
-<p>or</p>
-
-<%= link_to "Register yourself", new_customer_path %>
+  <div style="margin-top:10px">
+    <a href="/logout" class="btn btn-secondary active" role="button" aria-pressed="true">Logout</a>
+  </div>
+<%end%>

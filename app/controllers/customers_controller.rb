@@ -3,7 +3,10 @@ class CustomersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def home
-    @customers = Customer.all
+    if session[:current_customer] != nil
+      flash[:notice] = "You have been logged in! You can start to order."
+    end
+
   end 
 
   def index
@@ -21,10 +24,21 @@ class CustomersController < ApplicationController
   end
 
   def set_current_customer
-    if params[:customer].present?
-      @customer = Customer.find(params[:customer][:id])
-      session[:current_customer] = @customer
+    @customer = Customer.find_by_email(params[:customer][:email])
+    if @customer.present? && @customer.authenticate(params[:customer][:password])
+      session[:current_customer] = @customer.email
       redirect_to menus_path
+    else
+      flash[:alert] = "Invalid email or password"
+      redirect_to root_path
+    end
+  end
+
+  def logout
+    if session[:current_customer] != nil
+      session[:current_customer] = nil
+      flash[:notice] = "You have been logged out! Please log in before you order."
+      redirect_to root_path
     else
       redirect_to root_path
     end
@@ -60,6 +74,6 @@ class CustomersController < ApplicationController
     end
 
     def customer_params
-      params.require(:customer).permit(:email)
+      params.require(:customer).permit(:email, :password)
     end
 end
