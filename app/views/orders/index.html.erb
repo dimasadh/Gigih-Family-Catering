@@ -3,22 +3,28 @@
 <h1>Orders</h1>
 
 <div id="orders">
-  <table style="margin-bottom: 16px;">
-    <tr>
-      <th style="padding: 4px 12px;">Customer</th>
-      <th style="padding: 4px 12px;">Total Price</th>
-      <th style="padding: 4px 12px;">Status</th>
-      <th></th>
-    </tr>
-    <% @orders.each do |order| %>
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
-        <td style="padding: 4px 12px;"><%=order.customer.email %></td>
-        <td style="padding: 4px 12px;"><%=order.total_price %></td>
-        <td style="padding: 4px 12px;"><%=order.status %></td>
-        <td style="padding: 4px 12px;"><%= link_to "Show this order", order %></td>
+        <th scope="col">Customer</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Status</th>
+        <th></th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <%= render order %>
+          <td><%= link_to "Show", order, class:"btn btn-success" %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
 
-<%= link_to "New order", new_order_path %>
+<form method="post" action="/orders">
+  <input type="hidden" id="total_price" name="total_price" value=0.0> 
+  <input type="hidden" id="status" name="status" value="NEW">
+  <button type="submit" class="btn btn-primary mb-2" style="margin: 10px 0">New Order</button>
+</form>

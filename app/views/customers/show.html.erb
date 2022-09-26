@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @customer %>
-
-<div>
-  <%= link_to "Edit this customer", edit_customer_path(@customer) %> |
-  <%= link_to "Back to customers", customers_path %>
-
-  <%= button_to "Destroy this customer", @customer, method: :delete %>
+<div class="form-group">
+  <label for="customer_email">Email</label>
+  <input disabled type="text" id="customer_email" name="customer_email" value="<%=@customer.email%>">
 </div>
+
+<div style="margin: 10px 0">
+  <%= link_to "Edit", edit_customer_path(@customer), class:"btn btn-primary"%> |
+  <%= link_to "Back to customers", customers_path, class:"btn btn-secondary"%>
+</div>
+
+<%= button_to "Delete", @customer, method: :delete, class: "btn btn-outline-danger"%>

@@ -1,23 +1,22 @@
-<table style="margin-bottom: 16px;">
-  <tr>
-    <th style="padding: 4px 12px;">Name</th>
-    <th style="padding: 4px 12px;">Price</th>
-    <th style="padding: 4px 12px;">Category</th>
-  </tr>
-  <% Menu.all.each do |menu| %>
-
-    <div id="<%= dom_id menu %>">
-      
-
-      <tr>
-        <td style="padding: 4px 12px;"><%= menu.name %></td>
-        <td style="padding: 4px 12px;"><%= menu.price %></td>
-        <td style="padding: 4px 12px;"><%= menu.category.name %></td>
-      </tr>
-
-
-    </div>
-  <% end %>
+<table class=table>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Menu.all.each do |menu| %>
+      <div id="<%= dom_id menu %>">
+        <tr>
+          <td><%= menu.name %></td>
+          <td><%= menu.price %></td>
+          <td><%= menu.category.name %></td>
+        </tr>
+      </div>
+    <% end %>
+  </tbody>
 </table>
 
 <%= form_with(model: order_detail) do |form| %>
@@ -33,15 +32,16 @@
     </div>
 
   <% end %>
-  
-  <%=   select(:order_detail, :menu_id,  Menu.all.collect { |c| [ c.name, c.id] }) %>
-
-  <div>
+  <div class="form-group">
+    <label for="order_detail">Item :</label>
+    <%=select(:order_detail, :menu_id,  Menu.all.collect { |c| [ c.name, c.id] }) %>
+  </div>
+  <div class="form-group">
     <%= form.label :quantity, style: "display: block; margin-top: 16px;" %>
     <%= form.number_field :quantity, min: 1, style: "margin-bottom: 16px;" %>
   </div>
 
   <div>
-    <%= form.submit "Add to order"%>
+    <button type="submit" class="btn btn-primary mb-2">Add to cart</button>
   </div>
 <% end %>

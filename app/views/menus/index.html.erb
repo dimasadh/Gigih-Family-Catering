@@ -1,16 +1,30 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Menus</h1>
 
 <div id="menus">
-  <% @menus.each do |menu| %>
-    <%= render menu %>
-    <p>
-      <%= link_to "Show this menu", menu %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @menus.each do |menu| %>
+        <div id="<%= dom_id menu %>">
+          <tr>
+            <%= render menu %>
+            <td><%= link_to "Show", menu, class:"btn btn-success" %></td>
+          </tr>
+        </div>
+      <%end%>
+    </tbody>
+  </table>
 </div>
 
-<p><%= link_to "New menu", new_menu_path %></p>
-<p><%= link_to "Order here", orders_path %></p>
+<a href="orders/new" class="btn btn-primary active" role="button" aria-pressed="true">Order Here</a>
+<a href="menus/new" class="btn btn-secondary active" role="button" aria-pressed="true">Add New Menu</a>
+
+<p style="color: green"><%= notice %></p>
 

@@ -5,25 +5,29 @@
 <h4>Order ID: <%= session[:current_order] %></h2>
 
 <div id="order_details">
-  <table>
-    <tr>
-      <th style="padding: 4px 12px;">Name</th>
-      <th style="padding: 4px 12px;">Quantity</th>
-      <th style="padding: 4px 12px;">Sum Price</th>
-      <th></th>
-    </tr>
-    <% @order_details.each do |order_detail| %>
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
-        <td style="padding: 4px 12px;"><%=order_detail.menu.name %></td>
-        <td style="padding: 4px 12px;"><%=order_detail.quantity %></td>
-        <td style="padding: 4px 12px;"><%=order_detail.sum_price %></td>
-        <td><%= link_to "Show order details", order_detail %></td>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Sum Price</th>
+        <th></th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @order_details.each do |order_detail| %>
+        <tr>
+          <td><%=order_detail.menu.name %></td>
+          <td><%=order_detail.quantity %></td>
+          <td><%=order_detail.sum_price %></td>
+          <td><%= link_to "Show", order_detail, class: "btn btn-success"%></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
 
-<p><%= link_to "Add Item", new_order_detail_path %></p>
+<%= link_to "Add Item", new_order_detail_path, class: "btn btn-primary"%>
 
-<a href="orders/<%= session[:current_order]%>">Back to your orders</a>
+<a href="orders/<%= session[:current_order]%>" class="btn btn-secondary">Back to your orders</a>
 
