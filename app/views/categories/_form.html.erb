@@ -11,12 +11,10 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" name="category[name]" id="category_name" value="<%=category.name%>">
   </div>
+  <button type="submit" class="btn btn-primary mb-2" style="margin: 10px 0">Submit</button>
 
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

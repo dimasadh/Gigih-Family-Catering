@@ -11,12 +11,9 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+  <div class="form-group" style="margin: 10px 0;">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" name="customer[email]" id="customer_email" value="<%=customer.email%>">
   </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <button type="submit" class="btn btn-primary mb-2">Submit</button>
 <% end %>

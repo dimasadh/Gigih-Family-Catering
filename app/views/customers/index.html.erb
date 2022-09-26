@@ -3,12 +3,22 @@
 <h1>Customers</h1>
 
 <div id="customers">
-  <% @customers.each do |customer| %>
-    <%= render customer %>
-    <p>
-      <%= link_to "Show this customer", customer %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <%= render customer %>
+          <td><%= link_to "Show", customer, class:"btn btn-success" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New customer", new_customer_path %>
+<%= link_to "New customer", new_customer_path, class:"btn btn-primary" %>

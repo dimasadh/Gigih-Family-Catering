@@ -1,10 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @menu %>
+<div id="menus">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <div>
+        <tr>
+          <%= render @menu %>
+          <td><%= link_to "Edit", edit_menu_path(@menu), class: "btn btn-outline-success" %></td>
+          <td><%= button_to "Delete", @menu, method: :delete,  class: "btn btn-outline-danger" %></td>
+        </tr>
+      </div>
+    </tbody>
+  </table>
+</div>
 
 <div>
-  <%= link_to "Edit this menu", edit_menu_path(@menu) %> |
   <%= link_to "Back to menus", menus_path %>
-
-  <%= button_to "Destroy this menu", @menu, method: :delete %>
 </div>

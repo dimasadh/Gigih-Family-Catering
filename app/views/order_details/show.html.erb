@@ -3,7 +3,7 @@
 <%= render @order_detail %>
 
 <div>
-  <p><%= link_to "Edit this item", edit_order_detail_path(@order_detail) %></p> 
-  <p><%= link_to "Back to your cart", order_details_path %></p> 
-  <p><%= button_to "Delete item", @order_detail, method: :delete %></p>
+  <p><%= link_to "Edit this item", edit_order_detail_path(@order_detail), class:"btn btn-primary" %></p> 
+  <p><%= link_to "Back to your cart", order_details_path, class:"btn btn-secondary"%></p> 
+  <p><%= button_to "Delete item", @order_detail, method: :delete, class:"btn btn-outline-danger"%></p>
 </div>

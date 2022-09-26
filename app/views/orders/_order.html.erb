@@ -1,17 +1,5 @@
 <div id="<%= dom_id order %>">
-  <p>
-    <strong>Customer:</strong>
-    <%= order.customer.email %>
-  </p>
-
-  <p>
-    <strong>Total price:</strong>
-    <%= order.total_price %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= order.status %>
-  </p>
-
+  <td><%=order.customer.email %></td>
+  <td><%=order.total_price %></td>
+  <td><%=order.status %></td>
 </div>
