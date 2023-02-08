@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
   def set_current_customer
     @customer = Customer.find_by_email(params[:customer][:email])
     if @customer.present? && @customer.authenticate(params[:customer][:password])
-      session[:current_customer] = @customer.email
+      session[:current_customer] = @customer
       redirect_to menus_path
     else
       flash[:alert] = "Invalid email or password"

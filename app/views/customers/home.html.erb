@@ -20,7 +20,7 @@
 <% else %>
   <div class="form-group">
     <label for="customer_email">Email</label>
-    <input disabled type="text" id="customer_email" name="customer_email" value="<%=session[:current_customer]%>">
+    <input disabled type="text" id="customer_email" name="customer_email" value="<%=session[:current_customer]["email"]%>">
   </div>
   <div style="margin-top:10px">
     <a href="/logout" class="btn btn-secondary active" role="button" aria-pressed="true">Logout</a>
